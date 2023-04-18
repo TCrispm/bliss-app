@@ -2,12 +2,12 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import * as qs from "qs";
 
-const BASE_URL =
-  "https://private-anon-536d1f758e-blissrecruitmentapi.apiary-mock.com/";
+export const BASE_URL =
+  "https://private-anon-536d1f758e-blissrecruitmentapi.apiary-mock.com";
 
 export const getHealthStatus = async () => {
   try {
-    const response = await fetch(`${BASE_URL}health`);
+    const response = await fetch(`${BASE_URL}/health`);
     if (response.ok) {
       return await response.json();
     } else {
@@ -21,7 +21,7 @@ export const getHealthStatus = async () => {
 export const getQuestions = async (params) => {
   try {
     const response = await fetch(
-      `${BASE_URL}questions?${qs.stringify(params)}`
+      `${BASE_URL}/questions?${qs.stringify(params)}`
     );
     if (response.ok) {
       return await response.json();
@@ -39,7 +39,7 @@ export const shareScreen = async (email, url) => {
       email,
       url,
     };
-    const response = await fetch(`${BASE_URL}share?${qs.stringify(params)}`, {
+    const response = await fetch(`${BASE_URL}/share?${qs.stringify(params)}`, {
       method: "POST",
     });
     if (response.ok) {

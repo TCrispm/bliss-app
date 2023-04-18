@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from "react";
 
 export const SearchBox = ({ filter, setFilter, focus }) => {
   const textInput = useRef(null);
-
+  console.log("filter", filter);
   useEffect(() => {
     if (focus) {
       textInput.current.focus();
@@ -15,7 +15,7 @@ export const SearchBox = ({ filter, setFilter, focus }) => {
       ref={textInput}
       className={styles.inputContainer}
       type="text"
-      value={filter}
+      value={filter ? filter : ""}
       onChange={(e) => setFilter(e.target.value)}
       placeholder="Search"
     />
