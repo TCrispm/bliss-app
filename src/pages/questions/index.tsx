@@ -40,7 +40,7 @@ const Questions = () => {
   useEffect(() => {
     listQuestions();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [limit, offset]);
+  }, [limit, offset, route.query.filter]);
 
   const loadMore = () => {
     listQuestions(offset + 10);
