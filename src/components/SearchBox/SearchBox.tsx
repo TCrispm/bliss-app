@@ -11,15 +11,13 @@ export const SearchBox = ({ filter, setFilter, focus }) => {
   }, [focus]);
 
   return (
-    <div className={styles.container}>
-      <input
-        ref={textInput}
-        className={styles.inputContainer}
-        type="text"
-        value={filter}
-        onChange={(e) => setFilter(e.target.value)}
-        placeholder="Search"
-      />
-    </div>
+    <input
+      ref={textInput}
+      className={styles.inputContainer}
+      type="text"
+      value={filter}
+      onChange={(e) => setFilter(e.target.value)}
+      placeholder="Search"
+    />
   );
 };

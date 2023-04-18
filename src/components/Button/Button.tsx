@@ -1,3 +1,9 @@
+import styles from "./Button.module.css";
+
 export const Button = ({ text, onClick }) => {
-  return <button onClick={onClick}>{text}</button>;
+  return (
+    <button className={styles.button} onClick={onClick}>
+      {text}
+    </button>
+  );
 };

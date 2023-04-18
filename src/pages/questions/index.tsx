@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
-import { getQuestions } from "../api";
+import { getQuestions, shareScreen } from "../api";
 import { Question } from "@/components/Question/Question";
 import { SearchBox } from "@/components/SearchBox/SearchBox";
 import { useRouter } from "next/router";
 
 import { Button } from "@/components/Button/Button";
 import { Spinner } from "@/components/Spinner/Spinner";
+import styles from "@/styles/Questions.module.css";
 
 const Questions = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -52,19 +53,28 @@ const Questions = () => {
 
   return (
     <>
-      <SearchBox
-        filter={filter}
-        setFilter={setFilter}
-        focus={route.query.filter?.length === 0}
-      />
+      <div className={styles.header}>
+        <SearchBox
+          filter={filter}
+          setFilter={setFilter}
+          focus={route.query.filter?.length === 0}
+        />
+        <Button
+          text={"Share screen"}
+          onClick={async () => await shareScreen("test", "test")}
+        />
+      </div>
+
       {questions.map((question, index) => (
-        <Question key={index} question={question} questionNumber={index + 1} />
+        <Question key={index} question={question} />
       ))}
-      {isLoading && !questions.length ? (
-        <Spinner />
-      ) : (
-        <Button text="Show more" onClick={() => loadMore()} />
-      )}
+      <div className={styles.buttonContainer}>
+        {isLoading && !questions.length ? (
+          <Spinner />
+        ) : (
+          <Button text="Show more" onClick={() => loadMore()} />
+        )}
+      </div>
     </>
   );
 };

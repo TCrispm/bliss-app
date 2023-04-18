@@ -32,3 +32,22 @@ export const getQuestions = async (params) => {
     console.log(err);
   }
 };
+
+export const shareScreen = async (email, url) => {
+  try {
+    const params = {
+      email,
+      url,
+    };
+    const response = await fetch(`${BASE_URL}share?${qs.stringify(params)}`, {
+      method: "POST",
+    });
+    if (response.ok) {
+      return await response.json();
+    } else {
+      console.log(`${response.status}: Error`);
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
