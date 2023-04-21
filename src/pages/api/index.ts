@@ -51,3 +51,16 @@ export const shareScreen = async (email, url) => {
     console.log(err);
   }
 };
+
+export const getQuestion = async (id) => {
+  try {
+    const response = await fetch(`${BASE_URL}/questions/${id}`);
+    if (response.ok) {
+      return await response.json();
+    } else {
+      console.log(`${response.status}: Error`);
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
