@@ -5,18 +5,18 @@ export const useNetwork = () => {
     typeof window === "undefined" ? undefined : window.navigator.onLine
   );
 
-  const updateNetwork = (value: boolean) => {
-    setNetwork(value);
+  const updateNetwork = () => {
+    setNetwork(window.navigator.onLine);
   };
 
   useEffect(() => {
-    window.addEventListener("offline", () => console.log("off"));
+    window.addEventListener("offline", updateNetwork);
 
-    window.addEventListener("online", () => console.log("on"));
+    window.addEventListener("online", updateNetwork);
     return () => {
-      window.removeEventListener("offline", () => console.log("off"));
+      window.removeEventListener("offline", updateNetwork);
 
-      window.removeEventListener("online", () => console.log("on"));
+      window.removeEventListener("online", updateNetwork);
     };
   });
 
