@@ -1,6 +1,8 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
+import "@/styles/globals.css";
+import type { AppProps } from "next/app";
+import { useNetwork } from "../utils/checkConnection";
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  useNetwork();
+  return <Component {...pageProps} />;
 }

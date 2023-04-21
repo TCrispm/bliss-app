@@ -8,12 +8,13 @@ import { Button } from "@/components/Button/Button";
 import { Spinner } from "@/components/Spinner/Spinner";
 import styles from "@/styles/Questions.module.css";
 import * as qs from "qs";
+import { QuestionType } from "@/types/Question";
 
 const Questions = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [limit, setLimit] = useState<number>(10);
   const [offset, setOffset] = useState<number>(0);
-  const [questions, setQuestions] = useState([]);
+  const [questions, setQuestions] = useState<QuestionType[]>([]);
 
   const route = useRouter();
 
@@ -47,7 +48,7 @@ const Questions = () => {
   };
 
   return (
-    <>
+    <div className={styles.container}>
       <div className={styles.header}>
         <SearchBox
           filter={route.query.filter}
@@ -69,23 +70,25 @@ const Questions = () => {
         />
         <Button
           text={"Share screen"}
-          onClick={async () =>
-            await shareScreen("test@test.com", window.location.href)
-          }
+          onClick={async () => {
+            await shareScreen("test@test.com", window.location.href);
+            alert(`Share screen: ${window.location.href}`);
+          }}
         />
       </div>
-
-      {questions.map((question, index) => (
-        <Question key={index} question={question} />
-      ))}
-      <div className={styles.buttonContainer}>
-        {isLoading && !questions.length ? (
-          <Spinner />
-        ) : (
-          <Button text="Show more" onClick={() => loadMore()} />
-        )}
+      <div className={styles.content}>
+        {questions.map((question, index) => (
+          <Question key={index} question={question} />
+        ))}
+        <div className={styles.buttonContainer}>
+          {isLoading && !questions.length ? (
+            <Spinner />
+          ) : (
+            <Button text="Show more" onClick={() => loadMore()} />
+          )}
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 

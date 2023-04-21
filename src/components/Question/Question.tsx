@@ -1,7 +1,8 @@
 import { useRouter } from "next/router";
 import styles from "./Question.module.css";
+import { QuestionType } from "@/types/Question";
 
-export const Question = ({ question }) => {
+export const Question = ({ question }: { question: QuestionType }) => {
   const route = useRouter();
   return (
     <div
